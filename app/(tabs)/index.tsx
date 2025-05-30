@@ -18,11 +18,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Inter-Bold',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
+    fontFamily: 'Inter-Regular',
     color: '#666',
   },
 });

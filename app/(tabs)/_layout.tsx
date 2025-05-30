@@ -16,7 +16,7 @@ export default function TabLayout() {
           backgroundColor: '#FFFFFF',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontFamily: 'Inter-Bold',
         },
       }}>
       <Tabs.Screen
