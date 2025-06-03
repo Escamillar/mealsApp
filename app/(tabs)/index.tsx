@@ -1,10 +1,33 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { CATEGORIES } from '../../data/dummy_data';
+import CategoryGridTile from '../../components/CategoryGridTile';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  function renderCategoryItem({ item }: { item: any }) {
+    function pressHandler() {
+      router.push(`/meals/${item.id}`);
+    }
+
+    return (
+      <CategoryGridTile 
+        title={item.title} 
+        color={item.color} 
+        onPress={pressHandler}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome Home</Text>
-      <Text style={styles.subtitle}>Start building your app here</Text>
+      <FlatList 
+        data={CATEGORIES} 
+        keyExtractor={(item) => item.id}
+        renderItem={renderCategoryItem}
+        numColumns={2}
+      />
     </View>
   );
 }
@@ -12,18 +35,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#F2F2F7',
-  },
-  title: {
-    fontSize: 24,
-    fontFamily: 'Inter-Bold',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontFamily: 'Inter-Regular',
-    color: '#666',
-  },
+  }
 });
