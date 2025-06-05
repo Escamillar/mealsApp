@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { MEALS, CATEGORIES } from '../../data/dummy_data';
 import MealItem from '../../components/MealItem';
@@ -29,7 +29,6 @@ export default function MealsOverviewScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{categoryTitle}</Text>
       <FlatList 
         data={displayedMeals}
         keyExtractor={(item) => item.id}
@@ -44,10 +43,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#F2F2F7',
-  },
-  title: {
-    fontSize: 24,
-    fontFamily: 'Inter-Bold',
-    marginBottom: 16,
   }
 });

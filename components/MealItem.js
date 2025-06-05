@@ -1,44 +1,38 @@
 import { View, Text, Image, Pressable, StyleSheet, Platform } from "react-native"
-import { useNavigation} from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 import MealDetails from "./MealDetails"
 
 function MealItem({ id, title, imageUrl, duration, complexity, affordability }){
-    console.log('title', title)
-    console.log('imageUrl', imageUrl)
-
-    const navigation = useNavigation()
+    const router = useRouter();
    
     function selectMealItemHandler(){
-        navigation.navigate('MealDetail', { mealId: id})
+        router.push(`/meals/${id}/`);
     }
 
     return(
-        <View style={styles.mailItem}>
+        <View style={styles.mealItem}>
             <Pressable 
                 android_ripple={{ color: '#ccc'}}
                 style={({ pressed }) => (pressed ? styles.buttonPressed : null) } 
                 onPress={selectMealItemHandler}
             >
-                <View>
-                    <View>
-                        <Image 
-                            source={{uri: imageUrl}}
-                            style={styles.image}
-                        />
-                        <Text style={styles.title}>
-                            {title}
-                        </Text>
-                    </View>
-                    <MealDetails 
-                        duration={duration}
-                        complexity={complexity}
-                        affordability={affordability}
+                <View style={styles.innerContainer}>
+                    <Image 
+                        source={{uri: imageUrl}}
+                        style={styles.image}
                     />
+                    <Text style={styles.title}>
+                        {title}
+                    </Text>
                 </View>
+                <MealDetails 
+                    duration={duration}
+                    complexity={complexity}
+                    affordability={affordability}
+                />
             </Pressable>
         </View>
     )
-
 }
 
 export default MealItem
@@ -48,7 +42,7 @@ const styles = StyleSheet.create({
         margin: 16,
         borderRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor:'white',
+        backgroundColor: 'white',
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,
@@ -67,7 +61,7 @@ const styles = StyleSheet.create({
         height: 200
     },
     title: {
-        fontWeight: 'bold',
+        fontFamily: 'Inter-Bold',
         textAlign: 'center',
         fontSize: 18,
         margin: 8
